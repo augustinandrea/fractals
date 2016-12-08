@@ -69,7 +69,6 @@ Polygon::Polygon(Point center, int sides, int radius) {
     for(int i = 1; i <= sides; i++) {
       p.Rotate(this->center.x, this->center.y, 2*PI/sides);
       corners.push_back(p);
-      cout << "(" << p.x << "," << p.y << ")" << endl;
     }
   }
   color = WHITE;
