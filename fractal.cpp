@@ -6,7 +6,7 @@
 
 // function prototypes
 void drawSierpinski(int x1, int y1, int x2, int y2, int x3, int y3);
-void drawShrinkingSquares();
+void drawShrinkingSquares(int x1, int y1, int side);
 void drawSpiralSquares();
 void drawCircularLace();
 void drawSnowflake();
@@ -32,14 +32,11 @@ int main() {
 
     switch (c) {
     case '1':  // Sierpinski Triangle   
-      // (set up variables)
       drawSierpinski(wd/2, ht, 0, 0, wd, 0);
       break;
 
     case '2':  // Shrinking Squares
-      // (set up variables)
-       
-      //      drawShrinkingSquares();
+      drawShrinkingSquares(wd/4, ht/4, wd/2);
       break;
 
     case '3':  // Spiral Squares
@@ -100,26 +97,27 @@ void drawSierpinski(int x1, int y1, int x2, int y2, int x3, int y3) {
   drawSierpinski( (x1+x2)/2, (y1+y2)/2, x2, y2, (x2+x3)/2, (y2+y3)/2 );
   drawSierpinski( (x1+x3)/2, (y1+y3)/2, (x2+x3)/2, (y2+y3)/2, x3, y3 );
 }
-/*
-void drawShrinkingSquare(int xc, int yc, float radius, float theta){
-  if(radius < 5) {
+
+void drawShrinkingSquares(int x, int y, int side) {
+  if(side < 5) {
     return;
   }
 
   //Draw the square
-  gfx_line(x1,y1,x2,y2);
-  gfx_line(x2,y2,x3,y3);
-  gfx_line(x3,y3,x4,y4);
-  gfx_line(x4,y4,x1,y1);
-
+  gfx_line(x, y, x+side, y);
+  gfx_line(x+side, y, x+side, y+side);
+  gfx_line(x+side, y+side, x, y+side);
+  gfx_line(x, y+side, x, y);
+    
   //Recursive calls
-  drawShrinkingSquare(xc, yc, radius/2, theta*cos(PI/6));
-  drawShrinkingSquare(xc, yc);
-  drawShrinkingSquare();
-  drawShrinkingSquare();
+  drawShrinkingSquares(x-side/4, y-side/4, side/2);
+  drawShrinkingSquares(x+(side-side/4), y-side/4, side/2);
+  drawShrinkingSquares((x+side)-side/4, (y+side)-side/4, side/2);
+  drawShrinkingSquares(x-side/4, (y+side)-side/4, side/2);
 
 } 
 
+/*
 void drawSpiralSquares(int xc, int yc, float radius,float theta, int length){
   if (radius < 5) {
     return; 
