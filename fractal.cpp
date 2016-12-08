@@ -13,7 +13,7 @@ void drawCircularLace(int x, int y, int radius);
 void drawSnowflake(int x, int y, int length);
 void drawTree();
 void drawFern();
-void drawSpirals();
+void drawSpirals(int xc, int yc, float radius, float theta);
 
 int main() {
 
@@ -62,9 +62,7 @@ int main() {
       break;
       
     case '8':  // Spiral of spirals
-      // (set up variables)
-      
-      //      drawSpirals();
+      drawSpirals(wd/2,ht/2,1,0);
       break;
       
     }
@@ -194,16 +192,17 @@ void drawFern(float length,int x1, int y1, int x2, int y2){
   drawFern();
 
 }
-void drawSpirals(float radius, int xcenter, int ycenter, int x, int y){
-  if(radius < 5) {
-    return;
-  }
 
-  // drawing the point
-  gfx_point(x, y);
-
-  // Recursion
-  drawSpirals(radius);
-
-}
 */
+
+void drawSpirals(int xc, int yc, float radius, float theta){
+  if (radius > 500) {
+    return; 
+  }
+  drawSpiralSquares(xc, yc, radius/10, theta);
+  int newx = round(2.5*radius*cos(theta)+xc);
+  int newy = round(2.5*radius*sin(theta)+yc);
+
+  drawSpirals(newx, newy, radius*1.025, theta+PI/12);
+}
+
