@@ -21,8 +21,8 @@ int main() {
 
   // variables
   char c;  
-  int wd = 600;
-  int ht = 600;
+  int wd = 1000;
+  int ht = 1000;
 
   gfx_open(wd, ht, "Fractals");
 
@@ -99,7 +99,7 @@ void drawSierpinski(int x1, int y1, int x2, int y2, int x3, int y3) {
 }
 
 void drawShrinkingSquares(int x, int y, int side) {
-  if(side < 5) {
+  if(side < 2) {
     return;
   }
 
@@ -110,10 +110,10 @@ void drawShrinkingSquares(int x, int y, int side) {
   gfx_line(x, y+side, x, y);
     
   //Recursive calls
-  drawShrinkingSquares(x-side/4, y-side/4, side/2);
-  drawShrinkingSquares(x+(side-side/4), y-side/4, side/2);
-  drawShrinkingSquares((x+side)-side/4, (y+side)-side/4, side/2);
-  drawShrinkingSquares(x-side/4, (y+side)-side/4, side/2);
+  drawShrinkingSquares(x-side/5, y-side/5, 2*side/5);
+  drawShrinkingSquares(x+(side-side/5), y-side/5, 2*side/5);
+  drawShrinkingSquares(x+(side-side/5), y+(side-side/5), 2*side/5);
+  drawShrinkingSquares(x-side/5, y+(side-side/5), 2*side/5);
 
 } 
 
