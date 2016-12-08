@@ -1,25 +1,29 @@
 // candidate for overall structure of the fractals program
-#include "gfx.h"
+#include <iostream>
 #include <cmath>
+#include "gfx.h"
 
 // function prototypes
 void drawSierpinski(int,int,int,int,int,int);
 void drawShrinkingSquares();
 void drawSpiralSquares();
-void drawCircularSpace();
+void drawCircularLace();
 void drawSnowflake();
 void drawTree();
 void drawFern();
 void drawSpirals();
 
+const double PI= 3.14159;
+
 
 int main() {
 
   // variables
-  wd = 500;
-  ht = 400;
+  char c;  
+  int wd = 600;
+  int ht = 600;
 
-  gfx_open(wd, ht, "Fractal 1");
+  gfx_open(wd, ht, "Fractals");
 
   while (gfx_wait() != 'q') {
     c = gfx_wait();
@@ -28,55 +32,52 @@ int main() {
     switch (c) {
       case '1':  // Sierpinski Triangle   
        // (set up variables)
-       ...
-       drawSierpinski(...);
+	float radius;
+	drawSierpinski(wd/2,ht/2, radius);
       break;
 
       case '2':  // Shrinking Squares
        // (set up variables)
-       ...
-       drawShrinkingSquares(...);
+       
+       drawShrinkingSquares();
       break;
 
       case '3':  // Spiral Squares
        // (set up variables)
-       ...
-       drawSpiralSquares(...);
+       
+       drawSpiralSquares();
       break;
 
       case '4':  // Circular Lace
        // (set up variables)
-       ...
-       drawCircularLace(...);
+       
+       drawCircularLace();
       break;
 
       case '5':  // Snowflake
        // (set up variables)
-       ...
-       drawSnowflake(...);
+       
+       drawSnowflake();
       break;
 
       case '6':  // Tree
        // (set up variables)
-       ...
-       drawTree(...);
+       
+       drawTree();
       break;
 
       case '7':  // Fern
        // (set up variables)
-       ...
-       drawFern(...);
+       
+       drawFern();
       break;
 
       case '8':  // Spiral of spirals
        // (set up variables)
-       ...
-       drawSpirals(...);
+       
+       drawSpirals();
       break;
 
-      case 'q':  // end program
-       ...
-      break;
     }
   }
   return 0;
@@ -100,28 +101,110 @@ void drawSierpinski(int x1, int y1, int x2, int y2, int x3, int y3) {
   drawSierpinski( (x1+x3)/2, (y1+y3)/2, (x2+x3)/2, (y2+y3)/2, x3, y3 );
 }
 
-void drawShrinkingSquare(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4){
+void drawShrinkingSquare(int xc, int yc, float radius, float theta){
+  if(radius < 5) {
+    return;
+  }
 
+  //Draw the square
+  gfx_line(x1,y1,x2,y2);
+  gfx_line(x2,y2,x3,y3);
+  gfx_line(x3,y3,x4,y4);
+  gfx_line(x4,y4,x1,y1);
 
+  //Recursive calls
+  drawShrinkingSquare(xc, yc, radius/2, theta*cos(PI/6));
+  drawShrinkingSquare(xc, yc);
+  drawShrinkingSquare();
+  drawShrinkingSquare();
 
 } 
 
-void drawSpiralSquares(){
+void drawSpiralSquares(int xc, int yc, float radius,float theta, int length){
+  if (radius < 5) {
+    return; 
+  }
+
+  //Draw the square
+  gfx_line(x1,y1,x2,y2);
+  gfx_line(x2,y2,x3,y3);
+  gfx_line(x3,y3,x4,y4);
+  gfx_line(x4,y4,x1,y1);
+
+  //recursion
+  drawSpiralSquares(xc,yc,radius,theta*cos(PI/6),length/2);
+  drawSpiralSquares(xc,yc, radius-PI, theta*cos(PI/6), length/2);
+
+
 
 }
 
-void drawCircularSpace(){
+void drawCircularLace(float radius, int xc, int yc){
+  if(radius < 5){
+    return;
+  }
+  
+  // draw the circle
+  gfx_circle(xc, yc, radius);
+
+  radius = radius*0.5;
+  //recursion
+  drawCircularLace(xc, yc, radius/2);
+  drawCircularLace(xc);
+  drawCircularLace();
+}
+void drawSnowflake(int xcenter, int ycenter, float x1, float y1){
+  if(length < 5) {
+    return;
+  }
+
+  
+
+
+  gfx_line(xc,yc,x1,y1);
+  gfx_line(xc,yc,x1,y2);
+  gfx_line(xc,yc,x2,y2);
+  gfx_line(xc,yc,x3,y3);
 
 }
-void drawSnowflake(){
+void drawTree(float radius, int xcenter, int ycenter, int x, int y, float theta){
+  if(radius < 8) {
+    return;
+  }
+  //draw line
+  gfx_line(x1,y1,x2,y2,length);
+  
+
+  length *= PI/3;
+  
+
+
+  //recursion
+  drawTree(,);
+  }
+
 
 }
-void drawTree(){
+void drawFern(float length,int x1, int y1, int x2, int y2){
+  if(length < 5) {
+    return;
+  }
+  //draw line
+  gfx_line(x1, y1, x2, y2);
+  float rotate = PI/6;
+  //recursion
+  drawFern();
 
 }
-void drawFern(){
+void drawSpirals(float radius, int xcenter, int ycenter, int x, int y){
+  if(radius < 5) {
+    return;
+  }
 
-}
-void drawSpirals(){
+  // drawing the point
+  gfx_point(x, y);
+
+  // Recursion
+  drawSpirals(radius);
 
 }
