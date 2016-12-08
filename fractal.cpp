@@ -1,10 +1,11 @@
 // candidate for overall structure of the fractals program
 #include <iostream>
 #include <cmath>
+#include <stdlib.h>
 #include "gfx.h"
 
 // function prototypes
-void drawSierpinski(int,int,int,int,int,int);
+void drawSierpinski(int x1, int y1, int x2, int y2, int x3, int y3);
 void drawShrinkingSquares();
 void drawSpiralSquares();
 void drawCircularLace();
@@ -13,7 +14,7 @@ void drawTree();
 void drawFern();
 void drawSpirals();
 
-const double PI= 3.14159;
+const double PI = 3.14159;
 
 
 int main() {
@@ -30,54 +31,53 @@ int main() {
     gfx_clear();
 
     switch (c) {
-      case '1':  // Sierpinski Triangle   
-       // (set up variables)
-	float radius;
-	drawSierpinski(wd/2,ht/2, radius);
+    case '1':  // Sierpinski Triangle   
+      // (set up variables)
+      drawSierpinski(wd/2, 0, 0, ht, wd, ht);
       break;
 
-      case '2':  // Shrinking Squares
-       // (set up variables)
+    case '2':  // Shrinking Squares
+      // (set up variables)
        
-       drawShrinkingSquares();
+      //      drawShrinkingSquares();
       break;
 
-      case '3':  // Spiral Squares
-       // (set up variables)
+    case '3':  // Spiral Squares
+      // (set up variables)
        
-       drawSpiralSquares();
+      //      drawSpiralSquares();
       break;
 
-      case '4':  // Circular Lace
-       // (set up variables)
-       
-       drawCircularLace();
+    case '4':  // Circular Lace
+      // (set up variables)
+      
+      //      drawCircularLace();
       break;
-
-      case '5':  // Snowflake
-       // (set up variables)
-       
-       drawSnowflake();
+      
+    case '5':  // Snowflake
+      // (set up variables)
+      
+      //      drawSnowflake();
       break;
-
-      case '6':  // Tree
-       // (set up variables)
-       
-       drawTree();
+      
+    case '6':  // Tree
+      // (set up variables)
+      
+      //      drawTree();
       break;
-
-      case '7':  // Fern
-       // (set up variables)
-       
-       drawFern();
+      
+    case '7':  // Fern
+      // (set up variables)
+      
+      //      drawFern();
       break;
-
-      case '8':  // Spiral of spirals
-       // (set up variables)
-       
-       drawSpirals();
+      
+    case '8':  // Spiral of spirals
+      // (set up variables)
+      
+      //      drawSpirals();
       break;
-
+      
     }
   }
   return 0;
@@ -100,7 +100,7 @@ void drawSierpinski(int x1, int y1, int x2, int y2, int x3, int y3) {
   drawSierpinski( (x1+x2)/2, (y1+y2)/2, x2, y2, (x2+x3)/2, (y2+y3)/2 );
   drawSierpinski( (x1+x3)/2, (y1+y3)/2, (x2+x3)/2, (y2+y3)/2, x3, y3 );
 }
-
+/*
 void drawShrinkingSquare(int xc, int yc, float radius, float theta){
   if(radius < 5) {
     return;
@@ -208,3 +208,4 @@ void drawSpirals(float radius, int xcenter, int ycenter, int x, int y){
   drawSpirals(radius);
 
 }
+*/

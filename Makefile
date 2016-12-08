@@ -4,7 +4,7 @@
 GFLAGS=-g -c -std=c++11
 
 fractal: fractal.o 
-	g++ fractal.o -lX11 -o fractal.o
+	g++ fractal.o gfx.o -lX11 -o fractal
 
 fractal.o: fractal.cpp
 	g++ ${GFLAGS} fractal.cpp -o fractal.o
