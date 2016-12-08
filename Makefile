@@ -17,7 +17,7 @@ commit:
 
 pull:
 	-make commit
-	git pull
+	git pull https://github.com/augustinandrea/fractals
 
 push:
 	make pull
