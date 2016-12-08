@@ -33,7 +33,7 @@ int main() {
     switch (c) {
     case '1':  // Sierpinski Triangle   
       // (set up variables)
-      drawSierpinski(wd/2, 0, 0, ht, wd, ht);
+      drawSierpinski(wd/2, ht, 0, 0, wd, 0);
       break;
 
     case '2':  // Shrinking Squares
