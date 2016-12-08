@@ -3,19 +3,17 @@
 #include <cmath>
 #include <stdlib.h>
 #include "gfx.h"
+#include "polygon.h"
 
 // function prototypes
 void drawSierpinski(int x1, int y1, int x2, int y2, int x3, int y3);
 void drawShrinkingSquares(int x1, int y1, int side);
 void drawSpiralSquares();
 void drawCircularLace(int x, int y, int radius);
-void drawSnowflake();
+void drawSnowflake(int x, int y, int length);
 void drawTree();
 void drawFern();
 void drawSpirals();
-
-const double PI = 3.14159;
-
 
 int main() {
 
@@ -26,8 +24,8 @@ int main() {
 
   gfx_open(wd, ht, "Fractals");
 
-  while (gfx_wait() != 'q') {
-    c = gfx_wait();
+  while ((c = gfx_wait()) != 'q') {
+
     gfx_clear();
 
     switch (c) {
@@ -40,8 +38,6 @@ int main() {
       break;
 
     case '3':  // Spiral Squares
-      // (set up variables)
-       
       //      drawSpiralSquares();
       break;
 
@@ -50,9 +46,7 @@ int main() {
       break;
       
     case '5':  // Snowflake
-      // (set up variables)
-      
-      //      drawSnowflake();
+      drawSnowflake(wd/2, ht/2, wd/3);
       break;
       
     case '6':  // Tree
@@ -154,21 +148,32 @@ void drawCircularLace(int x, int y, int radius) {
   drawCircularLace(x+cos(2*PI/6)*radius, y+sin(2*PI/6)*radius, nr);
 }
 
-/*
-void drawSnowflake(int xcenter, int ycenter, float x1, float y1){
-  if(length < 5) {
+
+void drawSnowflake(int x, int y, int length) {
+
+  if(length < 2) {
     return;
   }
 
+  int nl = length/3;
+  Point points[5];
+  Point center(x,y);
   
+  points[0].x = x;
+  points[0].y = y + length;
+  gfx_line(center, points[0]);
+  drawSnowflake(points[0].x, points[0].y, nl);
 
-
-  gfx_line(xc,yc,x1,y1);
-  gfx_line(xc,yc,x1,y2);
-  gfx_line(xc,yc,x2,y2);
-  gfx_line(xc,yc,x3,y3);
+  for(int i = 1; i < 5; i++) {
+    points[i] = points[i-1];
+    points[i].Rotate(x, y, 2*PI/5);
+    gfx_line(center, points[i]);
+    drawSnowflake(points[i].x, points[i].y, nl);    
+  }
 
 }
+
+/*
 void drawTree(float radius, int xcenter, int ycenter, int x, int y, float theta){
   if(radius < 8) {
     return;

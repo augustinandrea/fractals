@@ -3,11 +3,14 @@
 # GFLAGS=-g -c -std=c++11 -DDEBUG
 GFLAGS=-g -c -std=c++11
 
-fractal: fractal.o 
-	g++ fractal.o gfx.o -lX11 -o fractal
+fractal: fractal.o polygon.o
+	g++ fractal.o polygon.o gfx.o -lX11 -o fractal
 
-fractal.o: fractal.cpp
+fractal.o: fractal.cpp polygon.h
 	g++ ${GFLAGS} fractal.cpp -o fractal.o
+
+polygon.o: polygon.cpp polygon.h
+	g++ ${GFLAGS} polygon.cpp -o polygon.o
 
 clea:
 	rm -f fractal.o *~ fractal
