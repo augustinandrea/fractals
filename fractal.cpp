@@ -8,7 +8,7 @@
 void drawSierpinski(int x1, int y1, int x2, int y2, int x3, int y3);
 void drawShrinkingSquares(int x1, int y1, int side);
 void drawSpiralSquares();
-void drawCircularLace();
+void drawCircularLace(int x, int y, int radius);
 void drawSnowflake();
 void drawTree();
 void drawFern();
@@ -46,9 +46,7 @@ int main() {
       break;
 
     case '4':  // Circular Lace
-      // (set up variables)
-      
-      //      drawCircularLace();
+      drawCircularLace(wd/2, ht/2, wd/3);
       break;
       
     case '5':  // Snowflake
@@ -136,21 +134,27 @@ void drawSpiralSquares(int xc, int yc, float radius,float theta, int length){
 
 
 }
+*/
 
-void drawCircularLace(float radius, int xc, int yc){
-  if(radius < 5){
+void drawCircularLace(int x, int y, int radius) {
+  if(radius < 2) {
     return;
   }
   
   // draw the circle
-  gfx_circle(xc, yc, radius);
+  gfx_circle(x, y, radius);
 
-  radius = radius*0.5;
+  int nr = radius/3;
   //recursion
-  drawCircularLace(xc, yc, radius/2);
-  drawCircularLace(xc);
-  drawCircularLace();
+  drawCircularLace(x-radius, y, nr);
+  drawCircularLace(x+radius, y, nr);
+  drawCircularLace(x-cos(2*PI/6)*radius, y-sin(2*PI/6)*radius, nr);
+  drawCircularLace(x+cos(2*PI/6)*radius, y-sin(2*PI/6)*radius, nr);
+  drawCircularLace(x-cos(2*PI/6)*radius, y+sin(2*PI/6)*radius, nr);
+  drawCircularLace(x+cos(2*PI/6)*radius, y+sin(2*PI/6)*radius, nr);
 }
+
+/*
 void drawSnowflake(int xcenter, int ycenter, float x1, float y1){
   if(length < 5) {
     return;
